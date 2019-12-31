@@ -16,7 +16,7 @@ repositories {
 }
 
 project.ext {
-    set("generatrApiVersion", "1.0.0.B2")
+    set("generatrApiVersion", "1.0.0.M3")
 
     set("bintrayUser", project.property("BINTRAY_USER") ?: "n/a")
     set("bintrayKey", project.property("BINTRAY_KEY") ?: "n/a")
