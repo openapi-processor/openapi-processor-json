@@ -30,10 +30,23 @@ import java.io.File
  */
 class JsonGeneratr : OpenApiGeneratr {
 
+    /**
+     * provides the generatr name.
+     */
     override fun getName(): String {
         return "json"
     }
 
+    /**
+     * runs the generatr.
+     *
+     * the options map should contain the following key/value pairs:
+     *
+     * - apiPath: (required) the path to the openapi.yaml file and the main input for the generatr.
+     * - targetDir: (required) the output folder for generating the openapi.json file.
+     *
+     * @param options map of generatr properties
+     */
     override fun run(options: MutableMap<String, *>) {
         val apiPath: String? = options["apiPath"]?.toString()
         val targetDir: String? = options["targetDir"]?.toString()
