@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.github.hauner.openapi"
-version = "1.0.0.M1"
+version = "1.0.0.M2"
 
 repositories {
     mavenCentral()
