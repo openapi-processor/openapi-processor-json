@@ -1,0 +1,61 @@
+{
+  "openapi" : "3.0.2",
+  "info" : {
+    "title" : "sample api",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/ping" : {
+      "get" : {
+        "tags" : [ "ping" ],
+        "summary" : "returns a single \"pong\" string.",
+        "description" : "very simple sample endpoint",
+        "responses" : {
+          "200" : {
+            "description" : "pong",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/echo" : {
+      "get" : {
+        "tags" : [ "echo" ],
+        "summary" : "echos the given parameter string.",
+        "description" : "sample endpoint with parameter",
+        "parameters" : [ {
+          "name" : "source",
+          "in" : "query",
+          "description" : "query, required, string",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "echo of the source parameter",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
