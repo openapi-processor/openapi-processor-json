@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.hauner.openapi.json.generatr
+package com.github.hauner.openapi.json.processor
 
 import com.github.difflib.DiffUtils
 import com.github.difflib.UnifiedDiffUtils
@@ -22,7 +22,7 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
-class JsonGeneratrSpec extends Specification {
+class JsonProcessorSpec extends Specification {
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder()
@@ -39,7 +39,7 @@ class JsonGeneratrSpec extends Specification {
         ]
 
         when:
-        def generatr = new JsonGeneratr()
+        def generatr = new JsonProcessor()
         generatr.run (options)
 
         then:

@@ -1,2 +1,1 @@
-rootProject.name = "openapi-generatr-json"
-
+rootProject.name = "openapi-processor-json"

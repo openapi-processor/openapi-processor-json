@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 the original authors
+ * Copyright 2019-2020 the original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.github.hauner.openapi.json.generatr
+package com.github.hauner.openapi.json.processor
 
-import com.github.hauner.openapi.api.OpenApiGeneratr
+import com.github.hauner.openapi.api.OpenApiProcessor
 import io.swagger.v3.core.util.Json
 import io.swagger.v3.parser.OpenAPIV3Parser
 import io.swagger.v3.parser.core.models.ParseOptions
@@ -24,11 +24,11 @@ import io.swagger.v3.parser.core.models.SwaggerParseResult
 import java.io.File
 
 /**
- *  Entry point of the openapi-generatr-json.
+ *  Entry point of the openapi-processor-json.
  *
  *  @author Martin Hauner
  */
-class JsonGeneratr : OpenApiGeneratr {
+class JsonProcessor : OpenApiProcessor {
 
     /**
      * provides the generatr name.
@@ -38,26 +38,26 @@ class JsonGeneratr : OpenApiGeneratr {
     }
 
     /**
-     * runs the generatr.
+     * runs the processor.
      *
      * the options map should contain the following key/value pairs:
      *
-     * - apiPath: (required) the path to the openapi.yaml file and the main input for the generatr.
+     * - apiPath: (required) the path to the openapi.yaml file and the main input for the processor.
      * - targetDir: (required) the output folder for generating the openapi.json file.
      *
-     * @param options map of generatr properties
+     * @param options map of processor properties
      */
     override fun run(options: MutableMap<String, *>) {
         val apiPath: String? = options["apiPath"]?.toString()
         val targetDir: String? = options["targetDir"]?.toString()
 
         if (apiPath == null) {
-            println("openapi-generatr-json: missing apiPath!")
+            println("openapi-processor-json: missing apiPath!")
             return
         }
 
         if (targetDir == null) {
-            println("openapi-generatr-json: missing targetDir!")
+            println("openapi-processor-json: missing targetDir!")
             return
         }
 

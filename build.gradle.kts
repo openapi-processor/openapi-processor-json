@@ -6,17 +6,17 @@ plugins {
 }
 
 group = "com.github.hauner.openapi"
-version = "1.0.0.M2"
+version = "1.0.0.M3"
 
 repositories {
     mavenCentral()
     maven {
-        setUrl("https://dl.bintray.com/hauner/openapi-generatr")
+        setUrl("https://dl.bintray.com/hauner/openapi-processor")
     }
 }
 
 project.ext {
-    set("generatrApiVersion", "1.0.0.M3")
+    set("generatrApiVersion", "1.0.0.M4")
 
     set("bintrayUser", project.findProperty("BINTRAY_USER") ?: "n/a")
     set("bintrayKey", project.findProperty("BINTRAY_KEY") ?: "n/a")
@@ -27,12 +27,12 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     implementation("io.swagger.parser.v3:swagger-parser:2.0.12")
-    compileOnly("com.github.hauner.openapi:openapi-generatr-api:${project.ext.get("generatrApiVersion")}")
+    compileOnly("com.github.hauner.openapi:openapi-processor-api:${project.ext.get("generatrApiVersion")}")
 
     testImplementation("net.bytebuddy:byte-buddy:1.9.13")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
     testImplementation("io.github.java-diff-utils:java-diff-utils:4.0")
-    testImplementation("com.github.hauner.openapi:openapi-generatr-api:${project.ext.get("generatrApiVersion")}")
+    testImplementation("com.github.hauner.openapi:openapi-processor-api:${project.ext.get("generatrApiVersion")}")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
@@ -64,14 +64,14 @@ bintray {
     user = project.ext.get("bintrayUser").toString()
     key = project.ext.get("bintrayKey").toString()
 
-    setPublications("GeneratrJson")
+    setPublications("processor")
 
     pkg.apply {
-        repo = "openapi-generatr"
-        name = "openapi-generatr-json"
+        repo = "openapi-processor"
+        name = "openapi-processor-json"
         //userOrg = 'openapi-generatr'
         setLicenses("Apache-2.0")
-        vcsUrl = "https://github.com/hauner/openapi-generatr-json"
+        vcsUrl = "https://github.com/hauner/openapi-processor-json"
 
         version.apply {
             name = project.version.toString()
@@ -81,7 +81,7 @@ bintray {
 
 publishing {
     publications {
-        create<MavenPublication>("GeneratrJson") {
+        create<MavenPublication>("processor") {
             from(components["java"])
             artifact(sourcesJar.get())
             artifact(javadocJar.get())

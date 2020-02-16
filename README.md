@@ -1,60 +1,51 @@
-[![][badge-license]][generatr-license]
+[![][badge-license]][oap-license]
 [![][badge-ci]][workflow-ci]
 
-# openapi-generatr-json
+![openapi-processor-api logo](images/openapi-processor-json@1280x200.png)
 
-a simple [OpenAPI][openapi] yaml to json generatr.
+
+# openapi-processor-json
+
+a simple [OpenAPI][openapi] yaml to json converter.
  
 
 # Getting Started
 
-The openapi generatr [gradle plugin][generatr-gradle] is the easiest way to use yaml to json generatr. 
+The openapi processor [gradle plugin][opa-gradle] is the easiest way to use the yaml to json processor. 
 
-## adding generatr-json
+## configuring openapi-processor-json
 
-The plugin provides a `openapiGeneratr` dependency configuration that is used to add the generatr dependency.
+The plugin will add an `openapiGeneratr` configuration block that is used to configure the openapi processors.
+Configuration for a specific processor is placed inside it using the processor name (in this case `json`) as
+configuration block name.   
 
-        dependencies {
-            // 'openapiGeneratr' is a custom configuration that is used by the gradle plugin.
-            openapiGeneratr 'com.github.hauner.openapi:openapi-generatr-json:1.0.0.M1'
-            
-            // .... 
-            // normal project dependencies
-            // .... 
-        }
-        
-## configuring generatr-json
-
-The plugin will add an `openapiGeneratr` configuration block that is used to configure the generatrs.
-Configuration for a specific generatr is placed inside it using the generatr name as configuration
-block name.   
-
-        openapiGeneratr {
+        openapiProcessor {
 
             json {
+                processor 'com.github.hauner.openapi:openapi-processor-json:1.0.0.Mx'
+            
                 apiPath = "$projectDir/src/api/openapi.yaml"
                 targetDir = "$projectDir/build/openapi"
             }        
 
         }
         
-- `apiPath`: (**required**) the path to the `openapi.yaml` file and the main input for the generatr.
+- `apiPath`: (**required**) the path to the `openapi.yaml` file and the main input for the processor.
 
 - `targetDir`: (**required**) the output folder for generating the `openapi.json` file.
 
 # Sample
 
-See [`openapi-generatr-spring-mvc-sample`][generatr-sample] for a complete working sample of a minimal
- openapi.yaml.
+See [`openapi-processor-spring-mvc-sample`][oap-sample] for a complete working sample of a minimal openapi.yaml.
 
 
 [badge-license]: https://img.shields.io/badge/License-Apache%202.0-blue.svg?labelColor=313A42
-[badge-ci]: https://github.com/hauner/openapi-generatr-json/workflows/ci/badge.svg
+[badge-ci]: https://github.com/hauner/openapi-processor-json/workflows/ci/badge.svg
 
-[workflow-ci]: https://github.com/hauner/openapi-generatr-json/actions?query=workflow%3Aci
+[workflow-ci]: https://github.com/hauner/openapi-processor-json/actions?query=workflow%3Aci
 
 [openapi]: https://www.openapis.org/
 
-[generatr-license]: https://github.com/hauner/openapi-generatr-json/blob/master/LICENSE
-[generatr-gradle]: https://github.com/hauner/openapi-generatr-gradle
-[generatr-sample]: https://github.com/hauner/openapi-generatr-spring-mvc-sample
+[oap-license]: https://github.com/hauner/openapi-processor-json/blob/master/LICENSE
+[oap-gradle]: https://github.com/hauner/openapi-processor-gradle
+[oap-sample]: https://github.com/hauner/openapi-generatr-spring-mvc-sample
