@@ -1,0 +1,59 @@
+:author: Martin Hauner
+:page-title: openapi-processor-json
+:page-layout: default
+:page-aliases: current@json:ROOT:index.adoc, latest@json:ROOT:index.adoc
+:badge-license: https://img.shields.io/badge/License-Apache%202.0-blue.svg?labelColor=313A42
+:badge-ci: https://github.com/hauner/openapi-processor-json/workflows/ci/badge.svg
+:oapj-ci: https://github.com/hauner/openapi-processor-json/actions?query=workflow%3Aci
+:oapj-license: https://github.com/hauner/openapi-processor-json/blob/master/LICENSE
+:oap-gradle: https://github.com/hauner/openapi-processor-gradle
+:swagger-ui: https://swagger.io/tools/swagger-ui/
+:openapi: https://www.openapis.org/
+
+//
+// content
+//
+image:openapi-processor-json$$@$$1280x200.png[openapi-processor-json]
+
+// badges
+link:{oapj-ci}[image:{badge-ci}[]]
+link:{oapj-license}[image:{badge-license}[]]
+
+
+a simple link:{openapi}[OpenAPI] yaml to json converter. May be useful to feed the OpenAPI to an api viewer like
+link:{swagger-ui}[Swagger UI].
+
+
+== Getting Started
+
+The link:{oap-gradle}[openapi-processor-gradle] gradle is the easiest way to use the yaml to json processor.
+
+== configuring gradle
+
+The gradle plugin will add an `openapiProcessor` configuration block that is used to configure the openapi processors.
+Configuration for a specific processor is going inside it with the processor name (in this case `json`) as the
+configuration block name.
+
+[source,groovy]
+----
+openapiProcessor {
+
+    json {
+        processor 'com.github.hauner.openapi:openapi-processor-json:1.0.0.M3'
+
+        apiPath = "$projectDir/src/api/openapi.yaml"
+        targetDir = "$projectDir/build/openapi"
+    }
+
+}
+----
+
+- `apiPath`: (**required**) the path to the `openapi.yaml` file and the main input for the processor.
+
+- `targetDir`: (**required**) the output folder for generating the `openapi.json` file.
+
+== Samples
+
+See xref:spring-mvc-sample:ROOT:index.adoc[spring mvc sample] or
+xref:spring-webflux-sample:ROOT:index.adoc[spring webflux sample] for a complete working spring boot sample with a
+minimal openapi.yaml.
