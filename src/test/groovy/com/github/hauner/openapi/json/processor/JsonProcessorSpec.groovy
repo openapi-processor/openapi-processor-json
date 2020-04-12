@@ -27,7 +27,7 @@ class JsonProcessorSpec extends Specification {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder()
 
-    void "run json generatr" () {
+    void "run json processor" () {
         def apiPath = ['.', 'src', 'test', 'resources', 'openapi.yaml'].join(File.separator)
         def expJson = ['.', 'src', 'test', 'resources', 'openapi.json'].join(File.separator)
         def targetDir = [folder.root.absolutePath].join(File.separator)
