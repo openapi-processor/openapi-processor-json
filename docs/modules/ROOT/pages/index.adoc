@@ -26,7 +26,7 @@ link:{swagger-ui}[Swagger UI].
 
 == Getting Started
 
-The link:{oap-gradle}[openapi-processor-gradle] gradle is the easiest way to use the yaml to json processor.
+The xref:gradle::index.adoc[openapi-processor-gradle] gradle is the easiest way to use the yaml to json processor.
 
 == configuring gradle
 
