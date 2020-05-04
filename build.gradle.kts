@@ -1,8 +1,9 @@
 plugins {
     groovy
-    id("org.jetbrains.kotlin.jvm") version("1.3.60")
+    id("org.jetbrains.kotlin.jvm") version("1.3.72")
     id("maven-publish")
-    id("com.jfrog.bintray") version ("1.8.4")
+    id("com.jfrog.bintray") version ("1.8.5")
+    id("com.github.ben-manes.versions") version ("0.28.0")
 }
 
 group = "com.github.hauner.openapi"
@@ -16,7 +17,7 @@ repositories {
 }
 
 project.ext {
-    set("generatrApiVersion", "1.0.0.M4")
+    set("processorApiVersion", "1.0.0.M4")
 
     set("bintrayUser", project.findProperty("BINTRAY_USER") ?: "n/a")
     set("bintrayKey", project.findProperty("BINTRAY_KEY") ?: "n/a")
@@ -26,13 +27,16 @@ dependencies {
 //    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation(kotlin("stdlib"))
 
-    implementation("io.swagger.parser.v3:swagger-parser:2.0.12")
-    compileOnly("com.github.hauner.openapi:openapi-processor-api:${project.ext.get("generatrApiVersion")}")
+    implementation("io.swagger.parser.v3:swagger-parser:2.0.19") {
+        exclude(group = "io.swagger.parser.v3", module = "swagger-parser-v2-converter")
+        exclude(group = "io.swagger.core.v3", module = "swagger-annotations")
+    }
+    compileOnly("com.github.hauner.openapi:openapi-processor-api:${project.ext.get("processorApiVersion")}")
 
-    testImplementation("net.bytebuddy:byte-buddy:1.9.13")
+    testImplementation("net.bytebuddy:byte-buddy:1.10.10")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
-    testImplementation("io.github.java-diff-utils:java-diff-utils:4.0")
-    testImplementation("com.github.hauner.openapi:openapi-processor-api:${project.ext.get("generatrApiVersion")}")
+    testImplementation("io.github.java-diff-utils:java-diff-utils:4.7")
+    testImplementation("com.github.hauner.openapi:openapi-processor-api:${project.ext.get("processorApiVersion")}")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
