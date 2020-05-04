@@ -21,7 +21,9 @@ import io.swagger.v3.core.util.Json
 import io.swagger.v3.parser.OpenAPIV3Parser
 import io.swagger.v3.parser.core.models.ParseOptions
 import io.swagger.v3.parser.core.models.SwaggerParseResult
-import java.io.File
+import java.net.URL
+import java.nio.file.Files
+import java.nio.file.Paths
 
 /**
  *  Entry point of the openapi-processor-json.
@@ -48,28 +50,45 @@ class JsonProcessor : OpenApiProcessor {
      * @param options map of processor properties
      */
     override fun run(options: MutableMap<String, *>) {
-        val apiPath: String? = options["apiPath"]?.toString()
-        val targetDir: String? = options["targetDir"]?.toString()
-
+        var apiPath: String? = options["apiPath"]?.toString()
         if (apiPath == null) {
             println("openapi-processor-json: missing apiPath!")
             return
         }
 
+        if (!hasScheme (apiPath)) {
+            apiPath = "file://${apiPath}"
+        }
+
+        var targetDir: String? = options["targetDir"]?.toString()
         if (targetDir == null) {
             println("openapi-processor-json: missing targetDir!")
             return
+        }
+
+        if (!hasScheme (targetDir)) {
+            targetDir = "file://${targetDir}"
         }
 
         val opts = ParseOptions()
         val result: SwaggerParseResult = OpenAPIV3Parser()
                 .readLocation(apiPath, null, opts)
 
-        val json = Json.pretty(result.openAPI)
-        val jsonn = json + "\n"
+        var json= Json.pretty(result.openAPI)
+        json += "\n"
 
-        val targetPath = listOf(targetDir, "openapi.json").joinToString(separator = File.separator)
-        File(targetPath).writeText(jsonn)
+        val p = Paths.get(URL(targetDir).toURI())
+        val dir = Files.createDirectories(p)
+        val targetPath = dir.resolve("openapi.json")
+        targetPath.toFile().writeText(json)
+    }
+
+    private fun hasScheme(path: String?): Boolean {
+        if (path == null) {
+            return false
+        }
+
+        return path.indexOf ("://") > -1
     }
 
 }

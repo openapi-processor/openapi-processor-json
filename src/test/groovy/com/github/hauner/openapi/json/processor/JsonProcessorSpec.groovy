@@ -34,13 +34,13 @@ class JsonProcessorSpec extends Specification {
         def targetPath = [targetDir, 'openapi.json'].join(File.separator)
 
         def options = [
-            apiPath: apiPath,
+            apiPath: new File(apiPath).canonicalPath,
             targetDir: targetDir
         ]
 
         when:
-        def generatr = new JsonProcessor()
-        generatr.run (options)
+        def processor = new JsonProcessor()
+        processor.run (options)
 
         then:
         def e = new File(expJson).text
