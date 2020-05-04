@@ -37,7 +37,13 @@ dependencies {
     compileOnly("com.github.hauner.openapi:openapi-processor-api:${project.ext.get("processorApiVersion")}")
 
     testImplementation("net.bytebuddy:byte-buddy:1.10.10")
-    testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
+    testImplementation("org.spockframework:spock-core:1.3-groovy-2.5") {
+        exclude(group = "org.codehaus.groovy", module = "groovy-json")
+        exclude(group = "org.codehaus.groovy", module = "groovy-macro")
+        exclude(group = "org.codehaus.groovy", module = "groovy-sql")
+        exclude(group = "org.codehaus.groovy", module = "groovy-templates")
+        exclude(group = "org.codehaus.groovy", module = "groovy-xml")
+    }
     testImplementation("io.github.java-diff-utils:java-diff-utils:4.7")
     testImplementation("com.github.hauner.openapi:openapi-processor-api:${project.ext.get("processorApiVersion")}")
 }
