@@ -39,7 +39,7 @@ configuration block name.
 openapiProcessor {
 
     json {
-        processor 'com.github.hauner.openapi:openapi-processor-json:1.0.0.M3'
+        processor 'com.github.hauner.openapi:openapi-processor-json:1.0.0.M4'
 
         apiPath = "$projectDir/src/api/openapi.yaml"
         targetDir = "$projectDir/build/openapi"

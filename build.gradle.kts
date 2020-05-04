@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.hauner.openapi"
-version = "1.0.0.M3"
+version = "1.0.0.M4"
 
 tasks.compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
