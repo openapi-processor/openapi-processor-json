@@ -9,18 +9,18 @@
 a simple [OpenAPI][openapi] yaml to json converter.
  
 
-# Documentation
+# documentation
 
 See [here][oap-docs].
   
 
 [badge-license]: https://img.shields.io/badge/License-Apache%202.0-blue.svg?labelColor=313A42
-[badge-ci]: https://github.com/hauner/openapi-processor-json/workflows/ci/badge.svg
+[badge-ci]: https://github.com/openapi-processor/openapi-processor-json/workflows/ci/badge.svg
 
-[workflow-ci]: https://github.com/hauner/openapi-processor-json/actions?query=workflow%3Aci
+[workflow-ci]: https://github.com/openapi-processor/openapi-processor-json/actions?query=workflow%3Aci
 
 [openapi]: https://www.openapis.org/
 
-[oap-docs]: https://hauner.github.com/openapi-processor/json/current/index.html
-[oap-license]: https://github.com/hauner/openapi-processor-json/blob/master/LICENSE
-[oap-sample]: https://github.com/hauner/openapi-generatr-spring-mvc-sample
+[oap-docs]: https://docs.openapiprocessor.io/json
+[oap-license]: https://github.com/openapi-processor/openapi-processor-json/blob/master/LICENSE
+[oap-sample]: https://github.com/openapi-processor/openapi-processor-spring-mvc-sample
