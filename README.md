@@ -1,4 +1,3 @@
-[![][badge-license]][oap-license]
 [![][badge-ci]][workflow-ci]
 
 ![openapi-processor-api logo](images/openapi-processor-json@1280x200.png)
@@ -23,4 +22,4 @@ See [here][oap-docs].
 
 [oap-docs]: https://docs.openapiprocessor.io/json
 [oap-license]: https://github.com/openapi-processor/openapi-processor-json/blob/master/LICENSE
-[oap-sample]: https://github.com/openapi-processor/openapi-processor-spring-mvc-sample
+
