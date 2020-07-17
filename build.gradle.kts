@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version("1.3.72")
     id("maven-publish")
     id("com.jfrog.bintray") version ("1.8.5")
-    id("com.github.ben-manes.versions") version ("0.28.0")
+    id("com.github.ben-manes.versions") version ("0.29.0")
 }
 
 val projectGroupId: String by project
@@ -33,13 +33,13 @@ project.ext {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("io.swagger.parser.v3:swagger-parser:2.0.19") {
+    implementation("io.swagger.parser.v3:swagger-parser:2.0.20") {
         exclude(group = "io.swagger.parser.v3", module = "swagger-parser-v2-converter")
         exclude(group = "io.swagger.core.v3", module = "swagger-annotations")
     }
     compileOnly("io.openapiprocessor:openapi-processor-api:${project.ext.get("processorApiVersion")}")
 
-    testImplementation("net.bytebuddy:byte-buddy:1.10.10")
+    testImplementation("net.bytebuddy:byte-buddy:1.10.13")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5") {
         exclude(group = "org.codehaus.groovy", module = "groovy-json")
         exclude(group = "org.codehaus.groovy", module = "groovy-macro")
