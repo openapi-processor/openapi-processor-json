@@ -16,7 +16,7 @@
 
 package com.github.hauner.openapi.json.processor
 
-import com.github.hauner.openapi.api.OpenApiProcessor
+import io.openapiprocessor.api.OpenApiProcessor
 import io.swagger.v3.core.util.Json
 import io.swagger.v3.parser.OpenAPIV3Parser
 import io.swagger.v3.parser.core.models.ParseOptions
