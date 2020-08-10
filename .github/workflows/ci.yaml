@@ -8,6 +8,8 @@ on:
       - '.github/**'
 
 jobs:
+
+
   build:
     name: build-${{ matrix.os }}
 
@@ -17,17 +19,27 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: set up JDK
+    - name: checkout
+      uses: actions/checkout@v1
+
+    - name cache
+      uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+    - name: set up jdk
       uses: actions/setup-java@v1
       with:
         java-version: 11.0.2
-    - name: build
-      run: ./gradlew build
 
-#    - name: publish snapshot
-#      if: success()
-#      run: echo "foo" ${{ matrix.os }}
+    - name: gradle check
+      run: ./gradlew check
+
 
   publish:
     needs: [build]
@@ -35,23 +47,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "foo"
+      - name: checkout
+        uses: actions/checkout@v1
 
-#    on:
-#      workflow_run:
-#        workflows: ["Run Tests"]
-#        branches: [main]
-#        types:
-#          - completed
+      - name cache
+        uses: actions/cache@v2
+          with:
+            path: |
+              ~/.gradle/caches
+              ~/.gradle/wrapper
+            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+            restore-keys: |
+              ${{ runner.os }}-gradle-
 
-#  publish:
-#
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#    - name: publish snapshot
-#      if: success()
-#      env:
-#        BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
-#        BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
-#      run: ./gradlew -PSNAPSHOT publish
+      - name: publish snapshot
+        env:
+          BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+          BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
+        run: ./gradlew -PSNAPSHOT publish
