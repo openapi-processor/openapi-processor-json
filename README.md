@@ -26,4 +26,5 @@ See [here][oap-docs].
 [badge-version-gh]: https://img.shields.io/github/v/release/openapi-processor/openapi-processor-json?color=009051&include_prereleases&label=latest%20version
 
 [bintray-json]: https://bintray.com/openapi-processor/primary/openapi-processor-json
-[badge-json]: https://img.shields.io/bintray/v/openapi-processor/primary/openapi-processor-json?color=009051&label=latest
+[badge-json]: https://img.shields.io/bintray/v/openapi-processor/primary/openapi-processor-json?color=009051&label=latest&labelColor=313A42
+
