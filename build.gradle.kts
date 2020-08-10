@@ -144,3 +144,11 @@ if (project.hasProperty("SNAPSHOT")) {
         }
     }
 }
+
+if (project.hasProperty("RELEASE")) {
+    tasks.publish {
+        onlyIf {
+            ! version.toString().endsWith("SNAPSHOT")
+        }
+    }
+}
