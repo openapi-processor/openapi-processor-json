@@ -1,4 +1,4 @@
-name: ci
+name: build
 
 on:
   push:
@@ -10,8 +10,8 @@ on:
 jobs:
 
 
-  build:
-    name: build-${{ matrix.os }}
+  test:
+    name: test (runner.os)
 
     runs-on: ${{ matrix.os }}
     strategy:
@@ -42,7 +42,8 @@ jobs:
 
 
   publish:
-    needs: [build]
+    needs: [test]
+    name: publish snapshot
 
     runs-on: ubuntu-latest
 
@@ -60,7 +61,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: publish snapshot
+      - name: publish snapshot to ojo
         env:
           BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
           BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
