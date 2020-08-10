@@ -9,8 +9,8 @@ on:
 
 jobs:
   build:
+    name: build-${{ matrix.os }}
 
-#    runs-on: ubuntu-latest
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -24,10 +24,25 @@ jobs:
         java-version: 11.0.2
     - name: build
       run: ./gradlew build
-    - name: publish snapshot
-      if: success()
-      run: echo "foo" ${{ matrix.os }}
 
+#    - name: publish snapshot
+#      if: success()
+#      run: echo "foo" ${{ matrix.os }}
+
+  publish:
+    needs: [build]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      run: echo "foo"
+
+#    on:
+#      workflow_run:
+#        workflows: ["Run Tests"]
+#        branches: [main]
+#        types:
+#          - completed
 
 #  publish:
 #
