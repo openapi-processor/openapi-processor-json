@@ -2,8 +2,6 @@ name: build
 
 on:
   push:
-    paths:
-      - '**'
     paths-ignore:
       - 'LICENSE'
       - 'README.md'
