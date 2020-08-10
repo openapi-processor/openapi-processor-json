@@ -48,7 +48,8 @@ class JsonProcessorSpec extends Specification {
         if (e != a) {
             printUnifiedDiff(new File(expJson), new File(targetPath))
         }
-        e == a
+
+        e.replace('\r', '') == a.replace('\r', '')
     }
 
     private void printUnifiedDiff (File expected, File generated) {

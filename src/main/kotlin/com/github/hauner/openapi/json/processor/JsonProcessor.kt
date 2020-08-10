@@ -56,9 +56,7 @@ class JsonProcessor : OpenApiProcessor {
             return
         }
 
-        if (!hasScheme (apiPath)) {
-            apiPath = "file://${apiPath}"
-        }
+        apiPath = toURL(apiPath).toString()
 
         var targetDir: String? = options["targetDir"]?.toString()
         if (targetDir == null) {
@@ -66,9 +64,7 @@ class JsonProcessor : OpenApiProcessor {
             return
         }
 
-        if (!hasScheme (targetDir)) {
-            targetDir = "file://${targetDir}"
-        }
+        targetDir = toURL(targetDir).toString()
 
         val opts = ParseOptions()
         val result: SwaggerParseResult = OpenAPIV3Parser()
@@ -83,12 +79,32 @@ class JsonProcessor : OpenApiProcessor {
         targetPath.toFile().writeText(json)
     }
 
-    private fun hasScheme(path: String?): Boolean {
-        if (path == null) {
-            return false
+    /**
+     * convert source to a valid URL.
+     *
+     * if the source is an url string it converts it to an URL
+     * if the source is not an URL it assumes a local path and prefixes it with file://(//) to
+     * create a valid URL.
+     *
+     * @param source source path or url
+     * @return an URL to the given source
+     */
+    private fun toURL(source: String): URL {
+        try {
+            return URL(source)
+        } catch (ignore: Exception) {
+            // catch
         }
 
-        return path.indexOf ("://") > -1
+        try {
+            return Paths.get(source)
+                .normalize ()
+                .toUri ()
+                .toURL ()
+        } catch (e: Exception) {
+            throw e
+        }
     }
+
 
 }
