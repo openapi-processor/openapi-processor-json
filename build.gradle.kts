@@ -1,8 +1,7 @@
 plugins {
     groovy
-    id("org.jetbrains.kotlin.jvm") version("1.3.72")
     id("maven-publish")
-    id("com.jfrog.bintray") version ("1.8.5")
+    id("org.jetbrains.kotlin.jvm") version("1.3.72")
     id("com.github.ben-manes.versions") version ("0.29.0")
 }
 
@@ -76,28 +75,19 @@ artifacts {
     archives(javadocJar)
 }
 
-bintray {
-    user = project.ext.get("bintrayUser").toString()
-    key = project.ext.get("bintrayKey").toString()
 
-    setPublications("processor")
 
-    pkg.apply {
-        repo = "primary"
-        name = "openapi-processor-json"
-        userOrg = "openapi-processor"
-        setLicenses("Apache-2.0")
-        vcsUrl = "https://github.com/openapi-processor/openapi-processor-json"
 
-        version.apply {
-            name = project.version.toString()
-        }
-    }
-}
+val projectTitle: String by project
+val projectDesc: String by project
+val projectUrl: String by project
+val projectGithubRepo: String by project
+val bintrayUser: String by project.ext
+val bintrayKey: String by project.ext
 
 publishing {
     publications {
-        create<MavenPublication>("processor") {
+        create<MavenPublication>("OpenApiProcessor") {
             from(components["java"])
             artifact(sourcesJar.get())
             artifact(javadocJar.get())
@@ -105,6 +95,44 @@ publishing {
             groupId = project.group.toString()
             artifactId = project.name
             version = project.version.toString()
+
+            pom {
+                name.set(projectTitle)
+                description.set("${projectTitle} - ${projectDesc} - ${project.name} module")
+                url.set(projectUrl)
+
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        distribution.set("repo")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("hauner")
+                        name.set("Martin Hauner")
+                    }
+                }
+
+                scm {
+                   url.set("https://github.com/${projectGithubRepo}")
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            val releasesRepoUrl = "https://api.bintray.com/maven/openapi-processor/primary/${project.name}/;publish=1;override=0"
+            val snapshotsRepoUrl = "https://oss.jfrog.org/oss-snapshot-local/"
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+
+            credentials {
+                username = project.ext.get("bintrayUser").toString()
+                password = project.ext.get("bintrayKey").toString()
+            }
         }
     }
 }
