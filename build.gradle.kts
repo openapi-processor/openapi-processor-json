@@ -25,8 +25,8 @@ repositories {
 project.ext {
     set("processorApiVersion", "1.1.0")
 
-    set("bintrayUser", project.findProperty("BINTRAY_USER") ?: "n/a")
-    set("bintrayKey", project.findProperty("BINTRAY_KEY") ?: "n/a")
+    set("bintrayUser", project.findProperty("BINTRAY_USER") ?: System.getenv("BINTRAY_USER") ?: "n/a")
+    set("bintrayKey", project.findProperty("BINTRAY_KEY") ?: System.getenv("BINTRAY_KEY") ?: "n/a")
 }
 
 dependencies {
@@ -98,7 +98,7 @@ publishing {
 
             pom {
                 name.set(projectTitle)
-                description.set("${projectTitle} - ${projectDesc} - ${project.name} module")
+                description.set("$projectTitle - $projectDesc - ${project.name} module")
                 url.set(projectUrl)
 
                 licenses {
