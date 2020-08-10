@@ -3,9 +3,11 @@ name: build
 on:
   push:
     paths:
-      - 'src/**'
-      - 'build.gradle'
-      - '.github/**'
+      - '**'
+    paths-ignore:
+      - 'LICENSE'
+      - 'README.md'
+      - 'docs/**'
 
 jobs:
 
