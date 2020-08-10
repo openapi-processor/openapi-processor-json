@@ -11,7 +11,7 @@ jobs:
 
 
   test:
-    name: test (runner.os)
+    name: test (${{ runner.os }})
 
     runs-on: ${{ matrix.os }}
     strategy:
