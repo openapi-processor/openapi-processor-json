@@ -10,7 +10,11 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@v1
@@ -22,7 +26,17 @@ jobs:
       run: ./gradlew build
     - name: publish snapshot
       if: success()
-      env:
-        BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
-        BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
-      run: ./gradlew -PSNAPSHOT publish
+      run: echo "foo" ${{ matrix.os }}
+
+
+#  publish:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: publish snapshot
+#      if: success()
+#      env:
+#        BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+#        BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
+#      run: ./gradlew -PSNAPSHOT publish
