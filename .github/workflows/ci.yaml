@@ -20,3 +20,9 @@ jobs:
         java-version: 11.0.2
     - name: build
       run: ./gradlew build
+    - name: publish snapshot
+      if: success()
+      env:
+        BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+        BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
+      run: ./gradlew publish -PSNAPSHOT

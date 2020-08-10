@@ -136,3 +136,11 @@ publishing {
         }
     }
 }
+
+if (project.hasProperty("SNAPSHOT")) {
+    tasks.publish {
+        onlyIf {
+            version.toString().endsWith("SNAPSHOT")
+        }
+    }
+}
