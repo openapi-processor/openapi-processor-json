@@ -22,7 +22,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v1
 
-    - name cache
+    - name: cache
       uses: actions/cache@v2
         with:
           path: |
@@ -50,7 +50,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
 
-      - name cache
+      - name: cache
         uses: actions/cache@v2
           with:
             path: |
