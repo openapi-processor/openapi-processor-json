@@ -6,6 +6,8 @@ on:
       - 'LICENSE'
       - 'README.md'
       - 'docs/**'
+    tags-ignore:
+      - v*
 
 jobs:
 
