@@ -76,8 +76,6 @@ artifacts {
 }
 
 
-
-
 val projectTitle: String by project
 val projectDesc: String by project
 val projectUrl: String by project
@@ -157,5 +155,5 @@ fun registerPublishTask(type: String, condition: () -> Boolean) {
 }
 
 fun hasSnapshotVersion(): Boolean {
-    return version.toString().endsWith("SNAPSHOT")
+    return version.toString().endsWith("-SNAPSHOT")
 }
