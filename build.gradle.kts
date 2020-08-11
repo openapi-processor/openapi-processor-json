@@ -127,7 +127,7 @@ publishing {
         maven {
             val releasesRepoUrl = "https://api.bintray.com/maven/openapi-processor/primary/${project.name}/;publish=1;override=0"
             val snapshotsRepoUrl = "https://oss.jfrog.org/oss-snapshot-local/"
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+            url = uri(if (hasSnapshotVersion()) snapshotsRepoUrl else releasesRepoUrl)
 
             credentials {
                 username = project.ext.get("bintrayUser").toString()
@@ -137,18 +137,25 @@ publishing {
     }
 }
 
-if (project.hasProperty("SNAPSHOT")) {
-    tasks.publish {
-        onlyIf {
-            version.toString().endsWith("SNAPSHOT")
+registerPublishTask("snapshot") { hasSnapshotVersion() }
+registerPublishTask("release") { !hasSnapshotVersion() }
+
+fun registerPublishTask(type: String, condition: () -> Boolean) {
+    tasks.register("publish${type.capitalize()}") {
+        group = "publishing"
+        description = "Publish only if the current version is a ${type.capitalize()} version"
+
+        if (condition()) {
+            println("enabling $type publishing")
+            dependsOn(tasks.withType<PublishToMavenRepository>())
+        } else {
+            doLast {
+                println("skipping - no $type version")
+            }
         }
     }
 }
 
-if (project.hasProperty("RELEASE")) {
-    tasks.publish {
-        onlyIf {
-            ! version.toString().endsWith("SNAPSHOT")
-        }
-    }
+fun hasSnapshotVersion(): Boolean {
+    return version.toString().endsWith("SNAPSHOT")
 }
