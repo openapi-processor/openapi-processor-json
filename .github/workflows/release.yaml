@@ -2,10 +2,10 @@ name: release
 
 on:
   push:
-    tags:
-      - 'v*'
-#  release:
-#    types: [published]
+    release:
+      types: [published]
+#    tags:
+#      - 'v*'
 
 jobs:
 
@@ -32,4 +32,4 @@ jobs:
         env:
           BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
           BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
-        run: ./gradlew -PRELEASE publish
+        run: ./gradlew publishRelease
