@@ -2,12 +2,14 @@ name: build
 
 on:
   push:
+    branches:
+      - '**'
     paths-ignore:
       - 'LICENSE'
       - 'README.md'
       - 'docs/**'
-#    tags-ignore:
-#      - v*
+    tags-ignore:
+      - v*
 
 jobs:
 
