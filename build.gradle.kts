@@ -1,8 +1,8 @@
 plugins {
     groovy
     id("maven-publish")
-    id("org.jetbrains.kotlin.jvm") version("1.3.72")
-    id("com.github.ben-manes.versions") version ("0.29.0")
+    id("org.jetbrains.kotlin.jvm") version("1.4.20")
+    id("com.github.ben-manes.versions") version ("0.36.0")
 }
 
 val projectGroupId: String by project
@@ -23,7 +23,7 @@ repositories {
 }
 
 project.ext {
-    set("processorApiVersion", "1.1.0")
+    set("processorApiVersion", "2020.3")
 
     set("bintrayUser", project.findProperty("BINTRAY_USER") ?: System.getenv("BINTRAY_USER") ?: "n/a")
     set("bintrayKey", project.findProperty("BINTRAY_KEY") ?: System.getenv("BINTRAY_KEY") ?: "n/a")
@@ -32,13 +32,13 @@ project.ext {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("io.swagger.parser.v3:swagger-parser:2.0.21") {
+    implementation("io.swagger.parser.v3:swagger-parser:2.0.24") {
         exclude(group = "io.swagger.parser.v3", module = "swagger-parser-v2-converter")
         exclude(group = "io.swagger.core.v3", module = "swagger-annotations")
     }
     compileOnly("io.openapiprocessor:openapi-processor-api:${project.ext.get("processorApiVersion")}")
 
-    testImplementation("net.bytebuddy:byte-buddy:1.10.14")
+    testImplementation("net.bytebuddy:byte-buddy:1.10.19")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5") {
         exclude(group = "org.codehaus.groovy", module = "groovy-json")
         exclude(group = "org.codehaus.groovy", module = "groovy-macro")
@@ -46,7 +46,7 @@ dependencies {
         exclude(group = "org.codehaus.groovy", module = "groovy-templates")
         exclude(group = "org.codehaus.groovy", module = "groovy-xml")
     }
-    testImplementation("io.github.java-diff-utils:java-diff-utils:4.7")
+    testImplementation("io.github.java-diff-utils:java-diff-utils:4.9")
     testImplementation("io.openapiprocessor:openapi-processor-api:${project.ext.get("processorApiVersion")}")
 }
 
