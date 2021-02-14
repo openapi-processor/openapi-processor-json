@@ -7,6 +7,8 @@
 :oap-gradle: https://github.com/hauner/openapi-processor-gradle
 :swagger-ui: https://swagger.io/tools/swagger-ui/
 :openapi: https://www.openapis.org/
+:oap-central: https://search.maven.org/search?q=io.openapiprocessor
+:badge-central: https://img.shields.io/maven-central/v/io.openapiprocessor/openapi-processor-json?label=Maven%20Central
 
 //
 // content
@@ -16,6 +18,7 @@ image:openapi-processor-json$$@$$1280x200.png[openapi-processor-json]
 // badges
 link:{oapj-ci}[image:{badge-ci}[]]
 link:{oapj-license}[image:{badge-license}[]]
+link:{oap-central}[image:{badge-central}[]]
 
 
 a simple link:{openapi}[OpenAPI] yaml to json converter. May be useful to feed the OpenAPI to an api viewer like
