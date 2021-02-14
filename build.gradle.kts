@@ -1,7 +1,8 @@
 plugins {
     groovy
     id("maven-publish")
-    id("org.jetbrains.kotlin.jvm") version("1.4.20")
+    id("signing")
+    id("org.jetbrains.kotlin.jvm") version("1.4.30")
     id("com.github.ben-manes.versions") version ("0.36.0")
 }
 
@@ -15,18 +16,57 @@ tasks.compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-repositories {
-    mavenCentral()
-    maven {
-        setUrl("https://dl.bintray.com/openapi-processor/primary")
+fun getBuildProperty(property: String): String {
+    val prop: String? = project.findProperty(property) as String?
+    if(prop != null) {
+        return prop
     }
+
+    val env: String? = System.getenv(property)
+    if (env != null) {
+        return env
+    }
+
+    return "n/a"
+}
+
+fun getBuildSignKey(property: String): String {
+    val prop: String? = project.findProperty(property) as String?
+    if(prop != null) {
+        return prop
+    }
+
+    val env: String? = System.getenv(property)
+    if (env != null) {
+        return env.replace("\\n", "\n")
+    }
+
+    return "n/a"
+}
+
+fun isReleaseVersion(): Boolean {
+    return !(project.version.toString().endsWith("SNAPSHOT"))
 }
 
 project.ext {
-    set("processorApiVersion", "2020.3")
+    set("processorApiVersion", "2021.1")
 
-    set("bintrayUser", project.findProperty("BINTRAY_USER") ?: System.getenv("BINTRAY_USER") ?: "n/a")
-    set("bintrayKey", project.findProperty("BINTRAY_KEY") ?: System.getenv("BINTRAY_KEY") ?: "n/a")
+    set("publishUser", getBuildProperty("PUBLISH_USER"))
+    set("publishKey", getBuildProperty("PUBLISH_KEY"))
+    set("signKey", getBuildSignKey("SIGN_KEY"))
+    set("signPwd", getBuildProperty("SIGN_PWD"))
+}
+
+
+repositories {
+    mavenCentral()
+    maven {
+        setUrl("https://oss.sonatype.org/content/repositories/snapshots")
+        mavenContent {
+            snapshotsOnly()
+        }
+    }
+    jcenter()
 }
 
 dependencies {
@@ -38,7 +78,7 @@ dependencies {
     }
     compileOnly("io.openapiprocessor:openapi-processor-api:${project.ext.get("processorApiVersion")}")
 
-    testImplementation("net.bytebuddy:byte-buddy:1.10.19")
+    testImplementation("net.bytebuddy:byte-buddy:1.10.20")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5") {
         exclude(group = "org.codehaus.groovy", module = "groovy-json")
         exclude(group = "org.codehaus.groovy", module = "groovy-macro")
@@ -80,8 +120,11 @@ val projectTitle: String by project
 val projectDesc: String by project
 val projectUrl: String by project
 val projectGithubRepo: String by project
-val bintrayUser: String by project.ext
-val bintrayKey: String by project.ext
+
+// does not work on oss.sonatype.org
+tasks.withType<GenerateModuleMetadata>().configureEach {
+    enabled = false
+}
 
 publishing {
     publications {
@@ -96,7 +139,7 @@ publishing {
 
             pom {
                 name.set(projectTitle)
-                description.set("$projectTitle - $projectDesc - ${project.name} module")
+                description.set(projectDesc)
                 url.set(projectUrl)
 
                 licenses {
@@ -123,17 +166,30 @@ publishing {
 
     repositories {
         maven {
-            val releasesRepoUrl = "https://api.bintray.com/maven/openapi-processor/primary/${project.name}/;publish=1;override=0"
-            val snapshotsRepoUrl = "https://oss.jfrog.org/oss-snapshot-local/"
-            url = uri(if (hasSnapshotVersion()) snapshotsRepoUrl else releasesRepoUrl)
+            val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            url = uri(if (isReleaseVersion()) releasesRepoUrl else snapshotsRepoUrl)
 
             credentials {
-                username = project.ext.get("bintrayUser").toString()
-                password = project.ext.get("bintrayKey").toString()
+                username = project.extra["publishUser"].toString()
+                password = project.extra["publishKey"].toString()
             }
         }
     }
 }
+
+//tasks.withType<Sign>().configureEach {
+//    onlyIf { isReleaseVersion() }
+//}
+
+signing {
+    useInMemoryPgpKeys(
+        project.extra["signKey"].toString(),
+        project.extra["signPwd"].toString())
+
+    sign(publishing.publications["OpenApiProcessor"])
+}
+
 
 registerPublishTask("snapshot") { hasSnapshotVersion() }
 registerPublishTask("release") { !hasSnapshotVersion() }
