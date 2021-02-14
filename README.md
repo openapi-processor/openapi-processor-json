@@ -1,4 +1,5 @@
-[![][badge-ci]][workflow-ci] [![][badge-json]][bintray-json]
+[![][badge-ci]][workflow-ci] 
+[![][badge-central]][oap-central]
 
 ![openapi-processor-api logo](images/openapi-processor-json@1280x200.png)
 
@@ -12,6 +13,9 @@ a simple [OpenAPI][openapi] yaml to json converter.
 
 See [here][oap-docs].
   
+
+[oap-central]: https://search.maven.org/search?q=io.openapiprocessor
+[badge-central]: https://img.shields.io/maven-central/v/io.openapiprocessor/openapi-processor-json?label=Maven%20Central
 
 [badge-license]: https://img.shields.io/badge/License-Apache%202.0-blue.svg?labelColor=313A42
 
