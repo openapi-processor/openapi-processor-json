@@ -13,7 +13,7 @@
 //
 // content
 //
-image:openapi-processor-json$$@$$1280x200.png[openapi-processor-json]
+image:openapi-processor-json-at-1280x200.png[openapi-processor-json]
 
 // badges
 link:{oapj-ci}[image:{badge-ci}[]]
