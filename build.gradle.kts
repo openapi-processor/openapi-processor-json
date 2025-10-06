@@ -41,13 +41,11 @@ tasks.compileTestGroovy {
 
 dependencies {
     implementation (libs.openapi.processor.api)
+    implementation (platform(libs.openapi.parser.bom))
+    implementation (libs.openapi.parser.parser)
+    implementation (libs.io.jackson)
 
-    implementation("io.swagger.parser.v3:swagger-parser:2.0.24") {
-        exclude(group = "io.swagger.parser.v3", module = "swagger-parser-v2-converter")
-        exclude(group = "io.swagger.core.v3", module = "swagger-annotations")
-    }
-
-    testImplementation("io.github.java-diff-utils:java-diff-utils:4.9")
+    testImplementation(libs.diff)
     testImplementation (platform(libs.groovy.bom))
     testImplementation ("org.apache.groovy:groovy")
     testImplementation ("org.apache.groovy:groovy-nio")
@@ -58,7 +56,7 @@ dependencies {
     testImplementation (libs.mockk)
     testImplementation (libs.logback)
 
-    testIntImplementation("io.github.java-diff-utils:java-diff-utils:4.9")
+    testIntImplementation(libs.diff)
     testIntImplementation (platform(libs.groovy.bom))
     testIntImplementation ("org.apache.groovy:groovy")
     testIntImplementation ("org.apache.groovy:groovy-nio")

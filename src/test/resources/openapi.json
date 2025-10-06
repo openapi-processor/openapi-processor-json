@@ -4,9 +4,6 @@
     "title" : "sample api",
     "version" : "1.0.0"
   },
-  "servers" : [ {
-    "url" : "/"
-  } ],
   "paths" : {
     "/ping" : {
       "get" : {
@@ -34,11 +31,9 @@
         "description" : "sample endpoint with parameter",
         "parameters" : [ {
           "name" : "source",
-          "in" : "query",
           "description" : "query, required, string",
+          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
           }

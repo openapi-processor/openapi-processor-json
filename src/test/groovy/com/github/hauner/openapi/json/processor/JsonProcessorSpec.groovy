@@ -22,7 +22,7 @@ class JsonProcessorSpec extends Specification {
         def targetPath = [targetDir, 'openapi.json'].join(File.separator)
 
         def options = [
-            apiPath: new File(apiPath).canonicalPath,
+            apiPath: new File(apiPath).absolutePath,
             targetDir: targetDir
         ]
 

@@ -5,22 +5,20 @@
 
 package com.github.hauner.openapi.json.processor
 
-import io.openapiprocessor.api.OpenApiProcessor
-import io.swagger.v3.core.util.Json
-import io.swagger.v3.parser.OpenAPIV3Parser
-import io.swagger.v3.parser.core.models.ParseOptions
-import io.swagger.v3.parser.core.models.SwaggerParseResult
-import java.net.URL
-import java.nio.file.Files
-import java.nio.file.Paths
+import io.openapiparser.OpenApiParser
+import io.openapiprocessor.jackson.JacksonConverter
+import io.openapiprocessor.jackson.JacksonJsonWriter
+import io.openapiprocessor.jsonschema.reader.UriReader
+import io.openapiprocessor.jsonschema.schema.DocumentLoader
+import io.openapiprocessor.jsonschema.schema.DocumentStore
+import java.io.File
+import java.io.FileWriter
 
 /**
  *  Entry point of the openapi-processor-json.
- *
- *  @author Martin Hauner
  */
-class JsonProcessor : OpenApiProcessor {
-
+class JsonProcessor : io.openapiprocessor.api.v2.OpenApiProcessor
+{
     /**
      * provides the generatr name.
      */
@@ -45,55 +43,26 @@ class JsonProcessor : OpenApiProcessor {
             return
         }
 
-        apiPath = toURL(apiPath).toString()
-
         var targetDir: String? = options["targetDir"]?.toString()
         if (targetDir == null) {
             println("openapi-processor-json: missing targetDir!")
             return
         }
 
-        targetDir = toURL(targetDir).toString()
+        val reader = UriReader()
+        val converter = JacksonConverter()
+        val loader = DocumentLoader(reader, converter)
 
-        val opts = ParseOptions()
-        val result: SwaggerParseResult = OpenAPIV3Parser()
-                .readLocation(apiPath, null, opts)
+        val documents = DocumentStore()
+        val parser = OpenApiParser(documents, loader)
 
-        var json= Json.pretty(result.openAPI)
-        json += "\n"
+        val baseUri = toURI(apiPath)
+        val result = parser.parse (baseUri)
+        val bundled = result.bundle()
 
-        val p = Paths.get(URL(targetDir).toURI())
-        val dir = Files.createDirectories(p)
-        val targetPath = dir.resolve("openapi.json")
-        targetPath.toFile().writeText(json)
+        val out = FileWriter(listOf(targetDir, "openapi.json").joinToString(File.separator))
+        val writer = JacksonJsonWriter(out)
+
+        writer.write(bundled)
     }
-
-    /**
-     * convert source to a valid URL.
-     *
-     * if the source is an url string it converts it to an URL
-     * if the source is not an URL it assumes a local path and prefixes it with file://(//) to
-     * create a valid URL.
-     *
-     * @param source source path or url
-     * @return an URL to the given source
-     */
-    private fun toURL(source: String): URL {
-        try {
-            return URL(source)
-        } catch (ignore: Exception) {
-            // catch
-        }
-
-        try {
-            return Paths.get(source)
-                .normalize ()
-                .toUri ()
-                .toURL ()
-        } catch (e: Exception) {
-            throw e
-        }
-    }
-
-
 }

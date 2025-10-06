@@ -7,13 +7,17 @@ build-jdk = "17"
 build-plugins = "2025.9"
 
 api = "2024.2"
-#base = "2025.5.1"
+parser = "2025.5-SNAPSHOT"
 
 junit = "5.9.3"
 jacoco = "0.8.7"
 
 [libraries]
 openapi-processor-api = { module = "io.openapiprocessor:openapi-processor-api", version.ref = "api" }
+openapi-parser-bom = { module = "io.openapiprocessor:openapi-parser-bom", version.ref = "parser" }
+openapi-parser-parser = { module = "io.openapiprocessor:openapi-parser" }
+io-jackson = { module = "io.openapiprocessor:io-jackson" }
+diff = { module = "io.github.java-diff-utils:java-diff-utils", version = "4.16" }
 
 logback = "ch.qos.logback:logback-classic:1.5.18"
 
