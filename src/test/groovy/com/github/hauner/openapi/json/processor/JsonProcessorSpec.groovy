@@ -18,19 +18,18 @@ package com.github.hauner.openapi.json.processor
 
 import com.github.difflib.DiffUtils
 import com.github.difflib.UnifiedDiffUtils
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.TempDir
 
 class JsonProcessorSpec extends Specification {
 
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder()
+    @TempDir
+    public File folder
 
     void "run json processor" () {
         def apiPath = ['.', 'src', 'test', 'resources', 'openapi.yaml'].join(File.separator)
         def expJson = ['.', 'src', 'test', 'resources', 'openapi.json'].join(File.separator)
-        def targetDir = [folder.root.absolutePath].join(File.separator)
+        def targetDir = [folder.absolutePath].join(File.separator)
         def targetPath = [targetDir, 'openapi.json'].join(File.separator)
 
         def options = [
@@ -69,5 +68,4 @@ class JsonProcessorSpec extends Specification {
             println it
         }
     }
-
 }
