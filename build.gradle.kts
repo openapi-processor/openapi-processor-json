@@ -47,7 +47,7 @@ dependencies {
         exclude(group = "io.swagger.core.v3", module = "swagger-annotations")
     }
 
-    testImplementation("io.github.java-diff-utils:java-diff-utils:4.9")
+    testImplementation("io.github.java-diff-utils:java-diff-utils:4.16")
     testImplementation (platform(libs.groovy.bom))
     testImplementation ("org.apache.groovy:groovy")
     testImplementation ("org.apache.groovy:groovy-nio")
@@ -58,7 +58,7 @@ dependencies {
     testImplementation (libs.mockk)
     testImplementation (libs.logback)
 
-    testIntImplementation("io.github.java-diff-utils:java-diff-utils:4.9")
+    testIntImplementation("io.github.java-diff-utils:java-diff-utils:4.16")
     testIntImplementation (platform(libs.groovy.bom))
     testIntImplementation ("org.apache.groovy:groovy")
     testIntImplementation ("org.apache.groovy:groovy-nio")
