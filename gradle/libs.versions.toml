@@ -34,4 +34,4 @@ plugin-build = { module = "io.openapiprocessor:build-plugins", version.ref = "bu
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
-updates = { id = "com.github.ben-manes.versions", version = "0.52.0" }
+updates = { id = "com.github.ben-manes.versions", version = "0.53.0" }
