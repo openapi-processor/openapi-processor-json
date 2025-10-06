@@ -42,7 +42,7 @@ tasks.compileTestGroovy {
 dependencies {
     implementation (libs.openapi.processor.api)
 
-    implementation("io.swagger.parser.v3:swagger-parser:2.0.24") {
+    implementation("io.swagger.parser.v3:swagger-parser:2.1.34") {
         exclude(group = "io.swagger.parser.v3", module = "swagger-parser-v2-converter")
         exclude(group = "io.swagger.core.v3", module = "swagger-annotations")
     }
