@@ -1,0 +1,33 @@
+[versions]
+processor = "2025.1-SNAPSHOT"
+
+kotlin = "2.2.20"
+target-jdk = "11"
+build-jdk = "17"
+build-plugins = "2025.9"
+
+api = "2024.2"
+#base = "2025.5.1"
+
+junit = "5.9.3"
+jacoco = "0.8.7"
+
+[libraries]
+openapi-processor-api = { module = "io.openapiprocessor:openapi-processor-api", version.ref = "api" }
+
+logback = "ch.qos.logback:logback-classic:1.5.18"
+
+kotest-bom = "io.kotest:kotest-bom:6.0.3"
+kotest-runner = { module = "io.kotest:kotest-runner-junit5" }
+kotest-table = { module = "io.kotest:kotest-assertions-table" }
+mockk = "io.mockk:mockk:1.14.5"
+
+groovy-bom = "org.apache.groovy:groovy-bom:4.0.28"
+spock = "org.spockframework:spock-core:2.3-groovy-4.0"
+
+# for buildSrc convention plugins
+plugin-build = { module = "io.openapiprocessor:build-plugins", version.ref = "build-plugins" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+[plugins]
+updates = { id = "com.github.ben-manes.versions", version = "0.52.0" }
