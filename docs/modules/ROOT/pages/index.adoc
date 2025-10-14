@@ -24,6 +24,7 @@ link:{oap-central}[image:{badge-central}[]]
 a simple link:{openapi}[OpenAPI] yaml to json converter. May be useful to feed the OpenAPI to an api viewer like
 link:{swagger-ui}[Swagger UI].
 
+It is reading the OpenAPI document, bundles it, i.e. it merges all external `$ref` s into the main document and writes it as JSON to disk.
 
 == Getting Started
 
