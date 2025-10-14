@@ -1,8 +1,8 @@
 :author: Martin Hauner
 :page-title: openapi-processor-json
 :badge-license: https://img.shields.io/badge/License-Apache%202.0-blue.svg?labelColor=313A42
-:badge-ci: https://github.com/hauner/openapi-processor-json/workflows/ci/badge.svg
-:oapj-ci: https://github.com/hauner/openapi-processor-json/actions?query=workflow%3Aci
+:badge-ci: https://github.com/hauner/openapi-processor-json/workflows/build/badge.svg
+:oapj-ci: https://github.com/hauner/openapi-processor-json/actions?query=workflow%3Abuild
 :oapj-license: https://github.com/hauner/openapi-processor-json/blob/master/LICENSE
 :oap-gradle: https://github.com/hauner/openapi-processor-gradle
 :swagger-ui: https://swagger.io/tools/swagger-ui/
