@@ -22,6 +22,9 @@ println("version: $version")
 java {
     withJavadocJar ()
     withSourcesJar ()
+
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 kotlin {
