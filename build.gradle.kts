@@ -68,7 +68,7 @@ dependencies {
     testIntImplementation (libs.kotest.runner)
     testIntImplementation (libs.kotest.table)
     testIntImplementation (libs.mockk)
-    testIntImplementation (libs.logback)
+    //testIntImplementation (libs.logback)
 }
 
 tasks.withType<Test>().configureEach {
