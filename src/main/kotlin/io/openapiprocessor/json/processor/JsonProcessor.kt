@@ -21,7 +21,7 @@ import java.io.FileWriter
 class JsonProcessor : OpenApiProcessor
 {
     /**
-     * provides the generatr name.
+     * provides the processor name.
      */
     override fun getName(): String {
         return "json"
