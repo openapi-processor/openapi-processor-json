@@ -3,9 +3,10 @@
  * PDX-License-Identifier: Apache-2.0
  */
 
-package com.github.hauner.openapi.json.processor
+package io.openapiprocessor.json.processor
 
 import io.openapiparser.OpenApiParser
+import io.openapiprocessor.api.v2.OpenApiProcessor
 import io.openapiprocessor.jackson.JacksonConverter
 import io.openapiprocessor.jackson.JacksonJsonWriter
 import io.openapiprocessor.jsonschema.reader.UriReader
@@ -17,7 +18,7 @@ import java.io.FileWriter
 /**
  *  Entry point of the openapi-processor-json.
  */
-class JsonProcessor : io.openapiprocessor.api.v2.OpenApiProcessor
+class JsonProcessor : OpenApiProcessor
 {
     /**
      * provides the generatr name.

@@ -3,7 +3,7 @@
  * PDX-License-Identifier: Apache-2.0
  */
 
-package com.github.hauner.openapi.json.processor
+package io.openapiprocessor.json.processor
 
 import java.net.URI
 import java.nio.file.Paths

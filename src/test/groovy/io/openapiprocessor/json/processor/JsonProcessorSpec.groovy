@@ -3,7 +3,7 @@
  * PDX-License-Identifier: Apache-2.0
  */
 
-package com.github.hauner.openapi.json.processor
+package io.openapiprocessor.json.processor
 
 import com.github.difflib.DiffUtils
 import com.github.difflib.UnifiedDiffUtils
