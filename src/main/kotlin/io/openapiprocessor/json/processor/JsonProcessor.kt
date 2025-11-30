@@ -38,13 +38,13 @@ class JsonProcessor : OpenApiProcessor
      * @param options map of processor properties
      */
     override fun run(options: MutableMap<String, *>) {
-        var apiPath: String? = options["apiPath"]?.toString()
+        val apiPath: String? = options["apiPath"]?.toString()
         if (apiPath == null) {
             println("openapi-processor-json: missing apiPath!")
             return
         }
 
-        var targetDir: String? = options["targetDir"]?.toString()
+        val targetDir: String? = options["targetDir"]?.toString()
         if (targetDir == null) {
             println("openapi-processor-json: missing targetDir!")
             return
