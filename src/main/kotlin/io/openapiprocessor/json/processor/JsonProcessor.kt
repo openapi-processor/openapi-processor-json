@@ -54,7 +54,6 @@ class JsonProcessor : OpenApiProcessor
         var targetName: String? = options["targetName"]?.toString()
         if (targetName == null) {
             targetName = "openapi.json"
-            return
         }
 
         val reader = UriReader()
