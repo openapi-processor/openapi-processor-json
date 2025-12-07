@@ -12,8 +12,9 @@ import io.openapiprocessor.jackson.JacksonJsonWriter
 import io.openapiprocessor.jsonschema.reader.UriReader
 import io.openapiprocessor.jsonschema.schema.DocumentLoader
 import io.openapiprocessor.jsonschema.schema.DocumentStore
-import java.io.File
 import java.io.FileWriter
+import java.nio.file.Files
+import java.nio.file.Paths
 
 /**
  *  Entry point of the openapi-processor-json.
@@ -50,6 +51,12 @@ class JsonProcessor : OpenApiProcessor
             return
         }
 
+        var targetName: String? = options["targetName"]?.toString()
+        if (targetName == null) {
+            targetName = "openapi.json"
+            return
+        }
+
         val reader = UriReader()
         val converter = JacksonConverter()
         val loader = DocumentLoader(reader, converter)
@@ -61,7 +68,12 @@ class JsonProcessor : OpenApiProcessor
         val result = parser.parse (baseUri)
         val bundled = result.bundle()
 
-        val out = FileWriter(listOf(targetDir, "openapi.json").joinToString(File.separator))
+        val x = toURI(targetDir)
+        val p = Paths.get(x)
+        val dir = Files.createDirectories(p)
+        val targetPath = dir.resolve(targetName)
+
+        val out = FileWriter(targetPath.toFile())
         val writer = JacksonJsonWriter(out)
 
         writer.write(bundled)
