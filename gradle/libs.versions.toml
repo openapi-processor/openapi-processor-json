@@ -4,7 +4,7 @@ processor = "2025.1-SNAPSHOT"
 kotlin = "2.2.21"
 target-jdk = "11"
 build-jdk = "17"
-build-plugins = "2025.11"
+build-plugins = "2025.12"
 
 api = "2024.2"
 parser = "2025.6-SNAPSHOT"
@@ -18,7 +18,7 @@ openapi-parser-parser = { module = "io.openapiprocessor:openapi-parser" }
 io-jackson = { module = "io.openapiprocessor:io-jackson" }
 diff = { module = "io.github.java-diff-utils:java-diff-utils", version = "4.16" }
 
-logback = "ch.qos.logback:logback-classic:1.5.21"
+logback = "ch.qos.logback:logback-classic:1.5.22"
 
 kotest-bom = "io.kotest:kotest-bom:6.0.7"
 kotest-runner = { module = "io.kotest:kotest-runner-junit5" }
