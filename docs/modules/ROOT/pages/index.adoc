@@ -21,32 +21,29 @@ link:{oapj-license}[image:{badge-license}[]]
 link:{oap-central}[image:{badge-central}[]]
 
 
-a simple link:{openapi}[OpenAPI] yaml to json converter. May be useful to feed the OpenAPI to an api viewer like
-link:{swagger-ui}[Swagger UI].
+a simple link:{openapi}[OpenAPI] YAML to JSON converter. Maybe useful to feed the OpenAPI to an api viewer like link:{swagger-ui}[Swagger UI].
 
-It is reading the OpenAPI document, bundles it, i.e. it merges all external `$ref` s into the main document and writes it as JSON to disk.
+It is reading the OpenAPI document, bundles it, i.e., it merges all external `$ref` s into the main document and writes it as JSON to disk.
 
 == Getting Started
 
-The xref:gradle::index.adoc[openapi-processor-gradle] gradle is the easiest way to use the yaml to json processor.
+Configuration is identical to the other processors.
 
-== configuring gradle
+== Gradle example configuration
 
-The gradle plugin will add an `openapiProcessor` configuration block that is used to configure the openapi processors.
-Configuration for a specific processor is going inside it with the processor name (in this case `json`) as the
-configuration block name.
+The xref:gradle::index.adoc[Gradle plugin] is required to run the processor from a gradle build.
+
+After adding the plugin add an `openapiProcessor` configuration like the one below to the Gradle build file.
 
 [source,groovy]
 ----
+// groovy
 openapiProcessor {
-
     json {
-        processor 'com.github.hauner.openapi:openapi-processor-json:2021.2'
-
+        processor 'io.openapiprocessor:openapi-processor-json:2026.1'
         apiPath = "$projectDir/src/api/openapi.yaml"
         targetDir = "$projectDir/build/openapi"
     }
-
 }
 ----
 
@@ -54,8 +51,6 @@ openapiProcessor {
 
 - `targetDir`: (**required**) the output folder for generating the `openapi.json` file.
 
-== Samples
+== Sample
 
-See xref:samples:ROOT:spring-mvc.adoc[spring mvc sample] or
-xref:samples:ROOT:spring-webflux.adoc[spring webflux sample] for a complete working spring boot sample with a
-minimal openapi.yaml.
+See the link:https://github.com/openapi-processor/openapi-processor-samples/tree/master/samples/spring-mvc-boot-4-packages-kt[spring-mvc-boot-4-packages-kt] samle project.
