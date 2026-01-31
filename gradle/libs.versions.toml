@@ -1,7 +1,7 @@
 [versions]
 processor = "2026.2-SNAPSHOT"
 
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 target-jdk = "11"
 build-jdk = "17"
 build-plugins = "2026.1"
@@ -20,12 +20,12 @@ diff = { module = "io.github.java-diff-utils:java-diff-utils", version = "4.16" 
 
 logback = "ch.qos.logback:logback-classic:1.5.26"
 
-kotest-bom = "io.kotest:kotest-bom:6.0.7"
+kotest-bom = "io.kotest:kotest-bom:6.1.2"
 kotest-runner = { module = "io.kotest:kotest-runner-junit5" }
 kotest-table = { module = "io.kotest:kotest-assertions-table" }
 mockk = "io.mockk:mockk:1.14.7"
 
-groovy-bom = "org.apache.groovy:groovy-bom:5.0.3"
+groovy-bom = "org.apache.groovy:groovy-bom:5.0.4"
 spock = "org.spockframework:spock-core:2.4-groovy-5.0"
 
 # for buildSrc convention plugins
