@@ -18,7 +18,7 @@ openapi-parser-parser = { module = "io.openapiprocessor:openapi-parser" }
 io-jackson = { module = "io.openapiprocessor:io-jackson" }
 diff = { module = "io.github.java-diff-utils:java-diff-utils", version = "4.16" }
 
-logback = "ch.qos.logback:logback-classic:1.5.24"
+logback = "ch.qos.logback:logback-classic:1.5.26"
 
 kotest-bom = "io.kotest:kotest-bom:6.0.7"
 kotest-runner = { module = "io.kotest:kotest-runner-junit5" }
