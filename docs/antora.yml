@@ -1,5 +1,5 @@
 name: json
 title: oap-json
-version: 2021.1
+version: master
 nav:
 - modules/ROOT/nav.adoc
