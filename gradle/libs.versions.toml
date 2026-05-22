@@ -16,7 +16,7 @@ openapi-processor-api = { module = "io.openapiprocessor:openapi-processor-api", 
 openapi-parser-bom = { module = "io.openapiprocessor:openapi-parser-bom", version.ref = "parser" }
 openapi-parser-parser = { module = "io.openapiprocessor:openapi-parser" }
 io-jackson = { module = "io.openapiprocessor:io-jackson" }
-diff = { module = "io.github.java-diff-utils:java-diff-utils", version = "4.16" }
+diff = { module = "io.github.java-diff-utils:java-diff-utils", version = "4.17" }
 
 logback = "ch.qos.logback:logback-classic:1.5.32"
 
