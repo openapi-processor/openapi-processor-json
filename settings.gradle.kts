@@ -1,7 +1,3 @@
-plugins {
-  id("io.github.ben-manes.versions.settings") version "0.61.0"
-}
-
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
@@ -12,6 +8,10 @@ dependencyResolutionManagement {
             }
         }
     }
+}
+
+plugins {
+  id("io.github.ben-manes.versions.settings") version "0.61.0"
 }
 
 rootProject.name = "openapi-processor-json"
