@@ -31,7 +31,6 @@ kotlin {
     jvmToolchain(libs.versions.build.jdk.get().toInt())
 
     compilerOptions {
-        freeCompilerArgs.add("-Xannotation-default-target=param-property")
         jvmTarget = JvmTarget.fromTarget(libs.versions.target.jdk.get())
     }
 }
