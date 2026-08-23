@@ -9,7 +9,7 @@ build-plugins = "2026.7"
 api = "2024.2"
 parser = "2026.2"
 
-jacoco = "0.8.7"
+jacoco = "0.8.15"
 
 [libraries]
 openapi-processor-api = { module = "io.openapiprocessor:openapi-processor-api", version.ref = "api" }
