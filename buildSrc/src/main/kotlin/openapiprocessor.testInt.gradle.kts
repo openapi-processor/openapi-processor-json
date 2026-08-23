@@ -12,9 +12,11 @@ val libs = the<LibrariesForLibs>()
 
 testing {
     suites {
-        val test by getting(JvmTestSuite::class)
+        val test = getByName<JvmTestSuite>("test") {
+            useJUnitJupiter()
+        }
 
-        val testInt by registering(JvmTestSuite::class) {
+        register<JvmTestSuite>("testInt") {
             useJUnitJupiter()
 
             dependencies {
