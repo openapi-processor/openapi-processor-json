@@ -1,3 +1,7 @@
+plugins {
+  id("io.github.ben-manes.versions.settings") version "0.59.0"
+}
+
 dependencyResolutionManagement {
     repositories {
         mavenCentral()

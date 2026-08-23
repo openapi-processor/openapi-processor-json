@@ -5,7 +5,6 @@ plugins {
     groovy
     kotlin
     jacoco
-    alias(libs.plugins.updates)
     id("openapiprocessor.test")
     id("openapiprocessor.testInt")
     id("openapiprocessor.publish")
