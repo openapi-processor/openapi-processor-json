@@ -11,9 +11,6 @@ plugins {
     id("jacoco-report-aggregation")
 }
 
-val projectGroupId: String by project
-val projectVersion: String by project
-
 group = "io.openapiprocessor"
 version = libs.versions.processor.get()
 println("version: $version")
